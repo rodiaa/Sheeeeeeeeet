@@ -24,6 +24,7 @@ import UIKit
  as before, with your custom appearance as parameter instead
  of `.standard`.
  */
+@MainActor
 open class ActionSheetAppearance {
 
     

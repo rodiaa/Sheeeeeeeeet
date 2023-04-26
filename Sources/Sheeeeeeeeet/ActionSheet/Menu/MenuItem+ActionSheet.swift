@@ -29,6 +29,7 @@ extension MenuItem {
      `IMPORTANT` You must override this function if you want
      a custom menu item class to use a custom cell type.
      */
+    @MainActor
     @objc open func actionSheetCell(for tableView: UITableView) -> ActionSheetItemCell {
         ActionSheetItemCell(style: actionSheetCellStyle)
     }
