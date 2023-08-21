@@ -64,6 +64,7 @@ open class ActionSheetItemHandler: NSObject, UITableViewDataSource, UITableViewD
         guard let item = self.item(at: indexPath) else { return UITableViewCell(frame: .zero) }
         let cell = item.actionSheetCell(for: tableView)
         cell.refresh(with: item)
+        removeLastSeparator(for: cell, at: indexPath)
         return cell
     }
     
@@ -71,7 +72,6 @@ open class ActionSheetItemHandler: NSObject, UITableViewDataSource, UITableViewD
         guard let item = self.item(at: indexPath) else { return 0 }
         return CGFloat(item.actionSheetCellHeight)
     }
-    
     
     // MARK: - UITableViewDelegate
     
@@ -81,5 +81,15 @@ open class ActionSheetItemHandler: NSObject, UITableViewDataSource, UITableViewD
         guard let sheet = actionSheet else { return }
         item.handleSelection(in: sheet.menu)
         sheet.handleTap(on: item)
+    }
+
+    // MARK: - Private
+    private func removeLastSeparator(for cell: UITableViewCell, at indexPath: IndexPath) {
+        if indexPath.row == (items.count - 1) {
+            // last item
+            cell.separatorInset = .hiddenSeparator
+        } else {
+            cell.separatorInset = .init(top: 0, left: 8, bottom: 0, right: 0)
+        }
     }
 }
